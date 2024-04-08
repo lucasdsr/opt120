@@ -2,10 +2,14 @@ import express, {Application, Request, Response, NextFunction} from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import {pool,initalize} from './database'
+
 const app = express()
+
 app.use(cors())
 app.use(bodyParser.json())
+
 initalize();
+
 app.get('/', async (req, res) => {
     res.send('Heylo') 
     await pool.query('SELECT * FROM USER')

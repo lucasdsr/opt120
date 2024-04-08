@@ -15,8 +15,18 @@ async function selectUsuarios() {
     return res[0];
 }
 
+async function selectUsuarioById(id) {
+    const res = await client.query('SELECT * FROM usuario WHERE ID=?', [id]);
+    return res[0];
+}
+
 async function selectAtividades() {
     const res = await client.query('SELECT * FROM atividade');
+    return res[0];
+}
+
+async function selectAtividadeById(id) {
+    const res = await client.query('SELECT * FROM atividade WHERE ID=?', [id]);
     return res[0];
 }
 
@@ -24,5 +34,17 @@ async function selectUsuariosAtividades() {
     const res = await client.query('SELECT * FROM usuario_atividade');
     return res[0];
 }
+
+async function selectUsuarioAtividadeById(id) {
+    const res = await client.query('SELECT * FROM usuario_atividade WHERE ID=?', [id]);
+    return res[0];
+}
  
-module.exports = { selectUsuarios, selectAtividades, selectUsuariosAtividades }
+module.exports = {
+    selectUsuarios,
+    selectUsuarioById,
+    selectAtividades,
+    selectAtividadeById,
+    selectUsuariosAtividades,
+    selectUsuarioAtividadeById
+}
