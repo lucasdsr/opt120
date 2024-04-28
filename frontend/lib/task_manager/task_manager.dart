@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'widgets/main_layout.dart';
-import 'widgets/my_app_state.dart';
+import './widgets/main_layout.dart';
+import './widgets/my_app_state.dart';
 
 export 'task_manager.dart';
 
