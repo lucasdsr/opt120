@@ -1,11 +1,12 @@
-import 'package:Opt120/utils/service/users.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../utils/validations.dart';
+import 'package:Opt120/utils/service/activities.dart';
 
-export 'user_creation_page.dart';
+export 'activity_creation_page.dart';
 
-class UserCreationPage extends StatelessWidget {
+class ActivityCreationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
@@ -14,31 +15,31 @@ class UserCreationPage extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            UserForm()
+            ActivityForm()
           ],
         ),
     );
   }
 }
 
-class UserForm extends StatefulWidget {
-  const UserForm({super.key});
+class ActivityForm extends StatefulWidget {
+  const ActivityForm({super.key});
 
   @override
-  State<UserForm> createState() => _UserFormState();
+  State<ActivityForm> createState() => _ActivityFormState();
 }
 
-class _UserFormState extends State<UserForm> {
+class _ActivityFormState extends State<ActivityForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String _name = '';
-  String _email = '';
-  String _password = '';
+  String _title = '';
+  String _description = '';
+  String _grade = '';
 
-  void createUser() {
-    UserRequests().createUser(_name, _email, _password)
+  void createActivity() {
+    ActivityRequests().createActivity(_title, _description, _grade)
       .then(() => {
-        print('usuario cadastrado')
+        print('atividade cadastrada')
       });
   }
 
@@ -57,7 +58,7 @@ class _UserFormState extends State<UserForm> {
                   margin: const EdgeInsets.only(bottom: 12),
                   child: 
                     Text(
-                      'Create user',
+                      'Create activity',
                       style:
                         TextStyle(
                           fontSize: 24,
@@ -73,11 +74,11 @@ class _UserFormState extends State<UserForm> {
                       child:
                         TextFormField(
                           decoration: const InputDecoration(
-                            hintText: 'Enter user name',
+                            hintText: 'Enter activity title',
                           ),
                           validator: emptyFieldValidation,
                           onSaved: (value) {
-                            _name = value!;
+                            _title = value!;
                           }
                         ),
                     ),
@@ -86,11 +87,11 @@ class _UserFormState extends State<UserForm> {
                       child:
                         TextFormField(
                           decoration: const InputDecoration(
-                            hintText: 'Enter user email',
+                            hintText: 'Enter activity description',
                           ),
                           validator: emptyFieldValidation,
                           onSaved: (value) {
-                            _email = value!;
+                            _description = value!;
                           }
                         ),
                     ),
@@ -105,11 +106,11 @@ class _UserFormState extends State<UserForm> {
                         TextFormField(
                           obscureText: true,
                           decoration: const InputDecoration(
-                            hintText: 'Enter user password',
+                            hintText: 'Enter activity grade',
                           ),
                           validator: emptyFieldValidation,
                           onSaved: (value) {
-                            _password = value!;
+                            _grade = value!;
                           }
                         ),
                     ),
@@ -121,7 +122,7 @@ class _UserFormState extends State<UserForm> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        createUser();
+                        createActivity();
                       }
                     },
                     child: const Text('Submit'),
