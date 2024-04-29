@@ -6,9 +6,10 @@ export 'routes.dart';
 import '../widgets/main_layout.dart';
 
 // import '../pages/home_page.dart';
-import '../pages/users_page.dart';
+import '../pages/users/users_page.dart';
 import '../pages/activities_page.dart';
 import '../pages/users_activities_page.dart';
+import '../pages/users/user_creation_page.dart';
 
 Widget generatePage (Widget page, int sidebarIndex) {
   return
@@ -21,6 +22,10 @@ final router = GoRouter(
     GoRoute(
       path: '/users',
       builder: (context, state) => generatePage(UsersPage(), 0),
+    ),
+    GoRoute(
+      path: '/users/create',
+      builder: (context, state) => generatePage(UserCreationPage(), 0),
     ),
     GoRoute(
       path: '/activities',

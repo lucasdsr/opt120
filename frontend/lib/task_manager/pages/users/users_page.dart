@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../widgets/custom_table.dart';
+import '../../widgets/custom_table.dart';
 
 export 'users_page.dart';
 
@@ -39,7 +40,17 @@ class UsersPage extends StatelessWidget {
                   )
               ),
           ),
-          CustomTable(data: userList)
+          CustomTable(data: userList),
+          Container(
+            margin: EdgeInsets.only(top: 12),
+            child:
+              ElevatedButton(
+                onPressed: () {
+                  GoRouter.of(context).go('/users/create');
+                },
+                child: Text('Create user'),
+              ),
+          )
         ]
       )
     );
