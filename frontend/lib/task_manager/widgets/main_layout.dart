@@ -20,16 +20,16 @@ class MainLayout extends StatelessWidget {
     void redirectTo (int index) {
       switch (index) {
         case 0:
-          context.go('/users');
+          GoRouter.of(context).go('/users');
           break;
         case 1:
-          context.go('/activities');
+          GoRouter.of(context).go('/activities');
           break;
         case 2:
-          context.go('/user-activities');
+          GoRouter.of(context).go('/user-activities');
           break;
         default:
-          context.go('/');
+          GoRouter.of(context).go('/');
       }
     }
 
