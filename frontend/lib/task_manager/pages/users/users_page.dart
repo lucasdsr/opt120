@@ -1,3 +1,4 @@
+import 'package:Opt120/utils/service/users.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -5,25 +6,27 @@ import '../../widgets/custom_table.dart';
 
 export 'users_page.dart';
 
-class UsersPage extends StatelessWidget {
+class UsersPage extends StatefulWidget {
+  @override
+  UserPageState createState() => UserPageState();
+}
+
+class UserPageState extends State<UsersPage> {
+  List<Map<String, dynamic>> userList = [];
+
+  @override
+  void initState(){
+    super.initState();
+
+    UserRequests().fetchUsers().then((users) => {
+      setState(() {
+        userList = users;
+      })
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    final userList = [
-      {
-        'name': 'user 1',
-        'age': '21',
-      },
-      {
-        'name': 'user 2',
-        'age': '22',
-      },
-      {
-        'name': 'user 3',
-        'age': '23',
-      },
-    ];
-
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,3 +1,4 @@
+import 'package:Opt120/utils/service/users.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/validations.dart';
@@ -33,6 +34,13 @@ class _UserFormState extends State<UserForm> {
   String _name = '';
   String _email = '';
   String _password = '';
+
+  void createUser() {
+    UserRequests().createUser(_name, _email, _password)
+      .then(() => {
+        print('usuario cadastrado')
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +111,7 @@ class _UserFormState extends State<UserForm> {
                       // the form is invalid.
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        print(_name);
-                        print(_email);
-                        print(_password);
+                        createUser();
                       }
                     },
                     child: const Text('Submit'),
