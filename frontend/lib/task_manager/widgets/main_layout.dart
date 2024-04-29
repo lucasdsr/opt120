@@ -1,39 +1,36 @@
 import 'package:flutter/material.dart';
 
-import '../pages/home_page.dart';
-import '../pages/users_page.dart';
-import '../pages/activities_page.dart';
-import '../pages/users_activities_page.dart';
+import 'package:go_router/go_router.dart';
 
 export 'main_layout.dart';
 
-class MainLayout extends StatefulWidget {
-  @override
-  State<MainLayout> createState() => _MainLayoutState();
-}
+class MainLayout extends StatelessWidget {
+  const MainLayout({
+    super.key,
+    required this.page,
+    required this.sidebarIndex,
+  });
 
-class _MainLayoutState extends State<MainLayout> {
-
-  var selectedIndex = 0;
+  final Widget page;
+  final int sidebarIndex;
 
   @override
   Widget build(BuildContext context) {
-    Widget page;
-    switch (selectedIndex) {
-      case 0:
-        page = HomePage();
-        break;
-      case 1:
-        page = UsersPage();
-        break;
-      case 2:
-        page = ActivitiesPage();
-        break;
-      case 3:
-        page = UsersActivitiesPage();
-        break;
-      default:
-        throw UnimplementedError('no widget for $selectedIndex');
+
+    void redirectTo (int index) {
+      switch (index) {
+        case 0:
+          context.go('/users');
+          break;
+        case 1:
+          context.go('/activities');
+          break;
+        case 2:
+          context.go('/user-activities');
+          break;
+        default:
+          context.go('/');
+      }
     }
 
     return LayoutBuilder(
@@ -45,10 +42,6 @@ class _MainLayoutState extends State<MainLayout> {
                 child: NavigationRail(
                   extended: constraints.maxWidth >= 600,
                   destinations: [
-                    NavigationRailDestination(
-                      icon: Icon(Icons.home),
-                      label: Text('Home'),
-                    ),
                     NavigationRailDestination(
                       icon: Icon(Icons.people),
                       label: Text('Users'),
@@ -62,11 +55,9 @@ class _MainLayoutState extends State<MainLayout> {
                       label: Text('User Activities'),
                     ),
                   ],
-                  selectedIndex: selectedIndex,
+                  selectedIndex: sidebarIndex | 0,
                   onDestinationSelected: (value) {
-                    setState(() {
-                      selectedIndex = value;
-                    });
+                    redirectTo(value);
                   },
                 ),
               ),
